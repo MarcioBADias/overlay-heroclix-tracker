@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { collections } from "@/data/collections";
+import { HC_UNIT_EDITIONS } from "@/data/collections";
 import { Plus } from "lucide-react";
 
 export interface Unit {
@@ -56,10 +56,10 @@ export const UnitForm = ({ onAddUnit }: UnitFormProps) => {
           <SelectTrigger id="collection" className="border-2 border-accent/50 bg-input">
             <SelectValue placeholder="Selecione a coleção" />
           </SelectTrigger>
-          <SelectContent className="bg-popover border-2 border-accent/50">
-            {collections.map((col) => (
-              <SelectItem key={col.id} value={col.id}>
-                {col.name}
+          <SelectContent className="bg-popover border-2 border-accent/50 max-h-[300px]">
+            {HC_UNIT_EDITIONS.map((col) => (
+              <SelectItem key={col.value} value={col.value}>
+                {col.label}
               </SelectItem>
             ))}
           </SelectContent>
