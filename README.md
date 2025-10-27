@@ -1,73 +1,43 @@
-# Welcome to your Lovable project
+# HEROCLIX BATTLE
 
-## Project info
+## Visão Geral
 
-**URL**: https://lovable.dev/projects/5e09a0c6-903f-4a66-9f1e-42df6fbb01c1
+HEROCLIX BATTLE é um aplicativo de utilidade projetado para gerenciar e cronometrar batalhas de Heroclix. Ele fornece uma interface de usuário clara e intuitiva para dois jogadores, permitindo que eles insiram seus nomes, acompanhem os pontos de vitória e o total de pontos, e gerenciem seus times e unidades. O aplicativo também inclui um temporizador de batalha personalizável para garantir que os jogos sejam jogados dentro de um limite de tempo.
 
-## How can I edit this code?
+## Recursos
 
-There are several ways of editing your application.
+* **Gerenciamento de Jogadores:** Insira nomes de jogadores para personalização.
+* **Acompanhamento de Pontos:** Monitore os Pontos de Vitória e os Pontos Totais para cada jogador.
+* **Gerenciamento de Times:** Adicione times para cada jogador.
+* **Gerenciamento de Unidades:** Acompanhe as unidades de cada jogador (detalhes a serem implementados).
+* **Temporizador de Batalha:** Um temporizador de 50 minutos (personalizável) com controles de reprodução/pausa e reset.
 
-**Use Lovable**
+## Captura de Tela
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/5e09a0c6-903f-4a66-9f1e-42df6fbb01c1) and start prompting.
+Aqui está uma imagem da interface principal do aplicativo:
 
-Changes made via Lovable will be committed automatically to this repo.
+http://googleusercontent.com/image_generation_content/0
 
-**Use your preferred IDE**
+## Como Usar
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+1.  **Iniciar o Aplicativo:** Abra o `index.html` em seu navegador web preferido ou inicie o servidor de desenvolvimento.
+2.  **Inserir Nomes dos Jogadores:** Digite os nomes dos jogadores nos campos "Nome do Jogador" correspondentes.
+3.  **Gerenciar Pontos:** Atualize os Pontos de Vitória e os Pontos Totais conforme o jogo avança. (A funcionalidade para isso pode ser implementada com botões de incremento/decremento).
+4.  **Adicionar Times:** Clique no botão "+ Adicionar Time" para configurar os times de cada jogador. (Esta funcionalidade precisará ser desenvolvida).
+5.  **Usar o Temporizador:**
+    * Clique no botão de **reprodução (triângulo)** para iniciar o temporizador.
+    * Clique no botão de **pausa (dois traços verticais)** para pausar o temporizador.
+    * Clique no botão de **reset (seta circular)** para redefinir o temporizador para o seu estado inicial (50:00).
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Desenvolvimento
 
-Follow these steps:
+### Tecnologias
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+O projeto parece ser construído com tecnologias web padrão, incluindo:
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+* **HTML5:** Para a estrutura da página.
+* **CSS3:** Para estilo e layout.
+* **JavaScript:** Para a lógica do temporizador e interatividade.
+* *Baseado nos arquivos anexados, o projeto é uma aplicação ReactJS/TypeScript (provavelmente usando Vite) com Tailwind CSS e a biblioteca shadcn/ui.*
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/5e09a0c6-903f-4a66-9f1e-42df6fbb01c1) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+### Estrutura do Projeto
