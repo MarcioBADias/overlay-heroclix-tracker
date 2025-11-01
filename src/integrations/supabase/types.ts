@@ -14,7 +14,277 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      match_players: {
+        Row: {
+          created_at: string
+          id: string
+          match_id: string
+          player_name: string
+          player_slot: number
+          total_points: number
+          user_id: string
+          victory_points: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          match_id: string
+          player_name: string
+          player_slot: number
+          total_points?: number
+          user_id: string
+          victory_points?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          match_id?: string
+          player_name?: string
+          player_slot?: number
+          total_points?: number
+          user_id?: string
+          victory_points?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "match_players_match_id_fkey"
+            columns: ["match_id"]
+            isOneToOne: false
+            referencedRelation: "matches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      match_spectators: {
+        Row: {
+          created_at: string
+          id: string
+          match_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          match_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          match_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "match_spectators_match_id_fkey"
+            columns: ["match_id"]
+            isOneToOne: false
+            referencedRelation: "matches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      match_units: {
+        Row: {
+          attached_to_id: string | null
+          attachment_type: string | null
+          collection: string
+          created_at: string
+          id: string
+          is_ko: boolean
+          is_sideline: boolean
+          match_id: string
+          name: string
+          number: string
+          player_slot: number
+          points: number
+        }
+        Insert: {
+          attached_to_id?: string | null
+          attachment_type?: string | null
+          collection: string
+          created_at?: string
+          id?: string
+          is_ko?: boolean
+          is_sideline?: boolean
+          match_id: string
+          name: string
+          number: string
+          player_slot: number
+          points: number
+        }
+        Update: {
+          attached_to_id?: string | null
+          attachment_type?: string | null
+          collection?: string
+          created_at?: string
+          id?: string
+          is_ko?: boolean
+          is_sideline?: boolean
+          match_id?: string
+          name?: string
+          number?: string
+          player_slot?: number
+          points?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "match_units_attached_to_id_fkey"
+            columns: ["attached_to_id"]
+            isOneToOne: false
+            referencedRelation: "match_units"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "match_units_match_id_fkey"
+            columns: ["match_id"]
+            isOneToOne: false
+            referencedRelation: "matches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      matches: {
+        Row: {
+          created_at: string
+          host_id: string
+          id: string
+          is_public: boolean
+          name: string
+          password_hash: string | null
+          status: string
+          timer_duration: number
+          timer_last_update: string | null
+          timer_remaining: number
+          timer_state: string
+        }
+        Insert: {
+          created_at?: string
+          host_id: string
+          id?: string
+          is_public?: boolean
+          name: string
+          password_hash?: string | null
+          status?: string
+          timer_duration?: number
+          timer_last_update?: string | null
+          timer_remaining?: number
+          timer_state?: string
+        }
+        Update: {
+          created_at?: string
+          host_id?: string
+          id?: string
+          is_public?: boolean
+          name?: string
+          password_hash?: string | null
+          status?: string
+          timer_duration?: number
+          timer_last_update?: string | null
+          timer_remaining?: number
+          timer_state?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      saved_teams: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      saved_units: {
+        Row: {
+          attached_to_id: string | null
+          attachment_type: string | null
+          collection: string
+          created_at: string
+          id: string
+          is_sideline: boolean
+          name: string
+          number: string
+          points: number
+          team_id: string
+        }
+        Insert: {
+          attached_to_id?: string | null
+          attachment_type?: string | null
+          collection: string
+          created_at?: string
+          id?: string
+          is_sideline?: boolean
+          name: string
+          number: string
+          points: number
+          team_id: string
+        }
+        Update: {
+          attached_to_id?: string | null
+          attachment_type?: string | null
+          collection?: string
+          created_at?: string
+          id?: string
+          is_sideline?: boolean
+          name?: string
+          number?: string
+          points?: number
+          team_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "saved_units_attached_to_id_fkey"
+            columns: ["attached_to_id"]
+            isOneToOne: false
+            referencedRelation: "saved_units"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "saved_units_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "saved_teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
