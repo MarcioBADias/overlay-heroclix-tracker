@@ -10,10 +10,11 @@ import { Loader2, Link as LinkIcon } from "lucide-react";
 interface ImportTeamDialogProps {
   open: boolean;
   onClose: () => void;
-  onTeamImported: (units: any[]) => void;
+  onTeamImported?: (units: any[]) => void;
+  onImport?: (units: any[]) => void;
 }
 
-export const ImportTeamDialog = ({ open, onClose, onTeamImported }: ImportTeamDialogProps) => {
+export const ImportTeamDialog = ({ open, onClose, onTeamImported, onImport }: ImportTeamDialogProps) => {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
@@ -62,7 +63,11 @@ export const ImportTeamDialog = ({ open, onClose, onTeamImported }: ImportTeamDi
         description: `${data.units.length} unidades importadas com sucesso.`,
       });
 
-      onTeamImported(data.units);
+      if (onTeamImported) {
+        onTeamImported(data.units);
+      } else if (onImport) {
+        onImport(data.units);
+      }
       setUrl("");
       onClose();
     } catch (error: any) {

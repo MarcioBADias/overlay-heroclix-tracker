@@ -7,6 +7,7 @@ import Landing from "./pages/Landing";
 import Auth from "./pages/Auth";
 import Lobby from "./pages/Lobby";
 import MyTeams from "./pages/MyTeams";
+import Match from "./pages/Match";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/auth" element={<Auth />} />
           <Route path="/lobby" element={<Lobby />} />
           <Route path="/my-teams" element={<MyTeams />} />
+          <Route path="/match/:matchId" element={<Match />} />
           <Route path="/game" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

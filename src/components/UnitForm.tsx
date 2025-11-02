@@ -19,30 +19,46 @@ export interface Unit {
   name: string;
   points: number;
   isKO: boolean;
+  isSideline?: boolean;
+  attachedToId?: string | null;
+  attachmentType?: string | null;
 }
 
 interface UnitFormProps {
-  onAddUnit: (unit: Omit<Unit, "id" | "isKO">) => void;
+  onAddUnit?: (unit: Omit<Unit, "id" | "isKO">) => void;
+  onSubmit?: (unit: Omit<Unit, "id" | "isKO">) => void;
+  onCancel?: () => void;
+  allowSideline?: boolean;
 }
 
-export const UnitForm = ({ onAddUnit }: UnitFormProps) => {
+export const UnitForm = ({ onAddUnit, onSubmit, onCancel, allowSideline = false }: UnitFormProps) => {
   const [collection, setCollection] = useState("");
   const [number, setNumber] = useState("");
   const [name, setName] = useState("");
   const [points, setPoints] = useState("");
+  const [isSideline, setIsSideline] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (collection && number && name && points) {
-      onAddUnit({
+      const unitData = {
         collection,
         number,
         name,
         points: parseInt(points),
-      });
+        isSideline: allowSideline ? isSideline : false,
+      };
+      
+      if (onSubmit) {
+        onSubmit(unitData);
+      } else if (onAddUnit) {
+        onAddUnit(unitData);
+      }
+      
       setNumber("");
       setName("");
       setPoints("");
+      setIsSideline(false);
     }
   };
 
@@ -113,13 +129,40 @@ export const UnitForm = ({ onAddUnit }: UnitFormProps) => {
         />
       </div>
 
-      <Button
-        type="submit"
-        className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-black text-lg rounded-xl h-12"
-      >
-        <Plus className="mr-2 h-5 w-5" />
-        Adicionar Unidade
-      </Button>
+      {allowSideline && (
+        <div className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            id="sideline"
+            checked={isSideline}
+            onChange={(e) => setIsSideline(e.target.checked)}
+            className="h-4 w-4"
+          />
+          <Label htmlFor="sideline" className="cursor-pointer">
+            Adicionar ao Sideline
+          </Label>
+        </div>
+      )}
+
+      <div className="flex gap-2">
+        <Button
+          type="submit"
+          className="flex-1 bg-accent hover:bg-accent/90 text-accent-foreground font-black text-lg rounded-xl h-12"
+        >
+          <Plus className="mr-2 h-5 w-5" />
+          Adicionar
+        </Button>
+        {onCancel && (
+          <Button
+            type="button"
+            variant="outline"
+            onClick={onCancel}
+            className="flex-1 rounded-xl h-12"
+          >
+            Cancelar
+          </Button>
+        )}
+      </div>
     </form>
   );
 };
