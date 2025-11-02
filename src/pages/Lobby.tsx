@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { Plus, Users, Lock, Unlock, LogOut, Swords } from "lucide-react";
+import { Plus, Users, Lock, Unlock, LogOut, Swords, Trash2 } from "lucide-react";
 import { CreateMatchDialog } from "@/components/lobby/CreateMatchDialog";
 import { JoinMatchDialog } from "@/components/lobby/JoinMatchDialog";
 
@@ -95,6 +95,31 @@ const Lobby = () => {
     navigate("/");
   };
 
+  const handleDeleteMatch = async (matchId: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    
+    if (!confirm("Tem certeza que deseja excluir esta partida?")) return;
+
+    const { error } = await supabase
+      .from("matches")
+      .delete()
+      .eq("id", matchId);
+
+    if (error) {
+      toast({
+        title: "Erro ao excluir partida",
+        description: error.message,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    toast({
+      title: "Partida excluída",
+      description: "A partida foi removida com sucesso.",
+    });
+  };
+
   return (
     <>
       <Helmet>
@@ -169,15 +194,26 @@ const Lobby = () => {
                       <Users className="h-4 w-4" />
                       <span>{match.player_count}/2 jogadores</span>
                     </div>
-                    <Button
-                      className="w-full mt-4"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setSelectedMatch(match);
-                      }}
-                    >
-                      Entrar
-                    </Button>
+                    <div className="flex gap-2 mt-4">
+                      <Button
+                        className="flex-1"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedMatch(match);
+                        }}
+                      >
+                        Entrar
+                      </Button>
+                      {user && match.host_id === user.id && (
+                        <Button
+                          variant="destructive"
+                          size="icon"
+                          onClick={(e) => handleDeleteMatch(match.id, e)}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
